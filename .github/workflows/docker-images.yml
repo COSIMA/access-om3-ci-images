@@ -9,6 +9,12 @@ on:
   pull_request:
     branches:
       - 'main'
+env:
+
+  # set the image name prefix. We cannot use ${{ github.repository }}, as it
+  #  contains upper-case letters and that currently does not work for the cache
+  #  registry.
+  IMAGE_PREFIX: cosima/access-om3-ci-images
 
 jobs:
   docker:
@@ -28,7 +34,7 @@ jobs:
         with:
           # list of Docker images to use as base name for tags
           images: |
-            ghcr.io/${{ github.repository }}/${{ matrix.os }}
+            ghcr.io/${{ env.IMAGE_PREFIX }}/${{ matrix.os }}
           # generate Docker tags based on the following events/attributes
           tags: |
             type=ref,event=branch
@@ -60,5 +66,5 @@ jobs:
           push: ${{ github.event_name != 'pull_request' }}
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
-          cache-from: type=registry,ref=ghcr.io/${{ github.repository }}/${{ matrix.os }}
+          cache-from: type=registry,ref=ghcr.io/${{ env.IMAGE_PREFIX }}/${{ matrix.os }}
           cache-to: type=inline
