@@ -3,6 +3,7 @@ FROM fedora:36
 # Install required packages
 RUN dnf install -y \
   wget \
+  git \
   cmake \
   gfortran \
   openmpi-devel \
