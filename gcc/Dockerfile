@@ -45,6 +45,7 @@ COPY --from=builder /etc/profile.d/z10_spack_environment.sh /etc/profile.d/z10_s
 RUN apt-get update && apt-get install -y --no-install-recommends \
   make \
   gfortran \
+  git \
   libstdc++-11-dev \
   && rm -rf /var/lib/apt/lists/*
 
