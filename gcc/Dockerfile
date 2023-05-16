@@ -47,6 +47,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
   gfortran \
   git \
   libstdc++-11-dev \
+  ca-certificates \
   && rm -rf /var/lib/apt/lists/*
 
 ENV LIBRARY_PATH="/opt/view/lib"
