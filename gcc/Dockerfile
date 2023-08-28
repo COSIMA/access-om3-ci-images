@@ -1,5 +1,5 @@
 # Build stage with Spack pre-installed and ready to be used
-FROM spack/ubuntu-jammy:v0.19.0 as builder
+FROM spack/ubuntu-jammy:v0.20.1 as builder
 
 
 # What we want to install and how we want to install it
@@ -7,15 +7,17 @@ FROM spack/ubuntu-jammy:v0.19.0 as builder
 RUN mkdir /opt/spack-environment \
 &&  (echo "spack:" \
 &&   echo "  specs:" \
-&&   echo "    - cmake@3.24.2" \
-&&   echo "    - netcdf-c@4.9.0+mpi" \
+&&   echo "    - cmake@3.24.4" \
+&&   echo "    - netcdf-c@4.9.2+mpi" \
 &&   echo "    - netcdf-fortran@4.6.0" \
-&&   echo "    - parallelio@2.5.8" \
-&&   echo "    - esmf@8.3.1+parallelio~pnetcdf" \
-&&   echo "    - fms@2022.04" \
+&&   echo "    - parallelio@2.5.10" \
+&&   echo "    - esmf@8.4.2" \
+&&   echo "    - fms@2021.03.01" \
 &&   echo "  view: /opt/view" \
 &&   echo "  concretizer:" \
 &&   echo "    unify: true" \
+&&   echo "    targets:" \
+&&   echo "      granularity: generic" \
 &&   echo "  config:" \
 &&   echo "    install_tree: /opt/software") > /opt/spack-environment/spack.yaml
 
