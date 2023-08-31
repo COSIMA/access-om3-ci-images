@@ -50,6 +50,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
   git \
   libstdc++-11-dev \
   ca-certificates \
+  patch \
   && rm -rf /var/lib/apt/lists/*
 
 ENV LIBRARY_PATH="/opt/view/lib"
