@@ -8,6 +8,7 @@ RUN mkdir /opt/spack-environment \
 &&  (echo "spack:" \
 &&   echo "  specs:" \
 &&   echo "    - cmake@3.24.4" \
+&&   echo "    - fortranxml@4.1.2" \
 &&   echo "    - netcdf-c@4.9.2+mpi build_system=cmake build_type=RelWithDebInfo" \
 &&   echo "    - netcdf-fortran@4.6.0" \
 &&   echo "    - parallelio@2.5.10 build_type=RelWithDebInfo" \
@@ -18,10 +19,17 @@ RUN mkdir /opt/spack-environment \
 &&   echo "    unify: true" \
 &&   echo "    targets:" \
 &&   echo "      granularity: generic" \
+&&   echo "  repos:" \
+&&   echo "  - $spack/var/spack/repos/builtin" \
+&&   echo "  - /opt/cosima" \
 &&   echo "  config:" \
 &&   echo "    install_tree: /opt/software") > /opt/spack-environment/spack.yaml
 
+# Add COSIMA repo
+RUN git clone --single-branch https://github.com/COSIMA/spack_packages.git /opt/cosima
+
 # Install the software, remove unnecessary deps
+
 RUN cd /opt/spack-environment && spack env activate . && spack install --fail-fast && spack gc -y
 
 # Strip all the binaries
