@@ -1,5 +1,5 @@
 # Build stage with Spack pre-installed and ready to be used
-FROM spack/ubuntu-jammy:v0.20.1 as builder
+FROM spack/ubuntu-jammy:0.21.2 as builder
 
 
 # What we want to install and how we want to install it
@@ -20,7 +20,7 @@ RUN mkdir /opt/spack-environment \
 &&   echo "    targets:" \
 &&   echo "      granularity: generic" \
 &&   echo "  repos:" \
-&&   echo "  - $spack/var/spack/repos/builtin" \
+&&   echo "  - /opt/spack/var/spack/repos/builtin" \
 &&   echo "  - /opt/cosima" \
 &&   echo "  config:" \
 &&   echo "    install_tree: /opt/software") > /opt/spack-environment/spack.yaml
