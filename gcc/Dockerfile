@@ -1,5 +1,5 @@
 # Build stage with Spack pre-installed and ready to be used
-FROM spack/ubuntu-jammy:v0.20.1 as builder
+FROM spack/ubuntu-jammy:0.21.2 as builder
 
 
 # What we want to install and how we want to install it
@@ -10,17 +10,17 @@ RUN mkdir /opt/spack-environment \
 &&   echo "    - cmake@3.24.4" \
 &&   echo "    - fortranxml@4.1.2" \
 &&   echo "    - netcdf-c@4.9.2+mpi build_system=cmake build_type=RelWithDebInfo" \
-&&   echo "    - netcdf-fortran@4.6.0" \
-&&   echo "    - parallelio@2.5.10 build_type=RelWithDebInfo" \
-&&   echo "    - esmf@8.4.2+debug" \
-&&   echo "    - fms@2021.03.01 precision=64 ~gfs_phys ~openmp ~quad_precision build_type=RelWithDebInfo" \
+&&   echo "    - netcdf-fortran@4.6.1" \
+&&   echo "    - parallelio@2.6.2 build_type=RelWithDebInfo" \
+&&   echo "    - esmf@8.5.0+debug" \
+&&   echo "    - fms@2023.02 precision=64 ~gfs_phys ~openmp ~quad_precision build_type=RelWithDebInfo" \
 &&   echo "  view: /opt/view" \
 &&   echo "  concretizer:" \
 &&   echo "    unify: true" \
 &&   echo "    targets:" \
 &&   echo "      granularity: generic" \
 &&   echo "  repos:" \
-&&   echo "  - $spack/var/spack/repos/builtin" \
+&&   echo "  - /opt/spack/var/spack/repos/builtin" \
 &&   echo "  - /opt/cosima" \
 &&   echo "  config:" \
 &&   echo "    install_tree: /opt/software") > /opt/spack-environment/spack.yaml
